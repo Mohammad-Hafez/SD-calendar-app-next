@@ -1,11 +1,20 @@
 'use client'
 
-import React from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { Button, Calendar } from 'antd'
 import { useRouter } from 'next/navigation'
 import { useSelector } from 'react-redux'
 
 export default function CalendarComponent() {
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  useMemo(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+  }, []);
+
   const router = useRouter()
   const slots = useSelector(state => state.slot.slots)
 
@@ -23,6 +32,10 @@ export default function CalendarComponent() {
         {userName ? `Booked by ${userName}` : ''}
       </div>
     )
+  }
+
+  if (isLoading) {
+    return <div>Loading...</div>; 
   }
 
   return (

@@ -1,15 +1,16 @@
 'use client'
 
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button, Calendar } from 'antd'
 import { useRouter } from 'next/navigation'
 import { useSelector } from 'react-redux'
+import Loading from '@/app/loading'
 
 export default function CalendarComponent() {
 
   const [isLoading, setIsLoading] = useState(true);
 
-  useMemo(() => {
+  useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
     }, 1000);
@@ -35,7 +36,7 @@ export default function CalendarComponent() {
   }
 
   if (isLoading) {
-    return <div>Loading...</div>; 
+    return <Loading/>; 
   }
 
   return (
